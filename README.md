@@ -1,4 +1,4 @@
-# check_files
+# check_files.sh
 This is a simple file checker to monitor files in a unix directory. I use it with Nagios. 
 
 ## Usage
