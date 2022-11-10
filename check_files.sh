@@ -4,13 +4,7 @@
 #
 # Author:       Robert Hess
 # Github:       https://github.com/robert2555
-# Date:         14.01.2019
-#
-# 20190128      added function for files
-# 20200820      added directory check
-# 20200826      added depth parameter
-# 20201202      bugfix files wildcard
-###########################################
+###############################################
 
 v_folder=$1
 v_warn=$2
@@ -58,15 +52,15 @@ fi
 function f_file {
 
 # Crit
-if [[ ( $v_period == "days" && -n $(find $v_folder -maxdepth ${v_depth} -name "*${v_file}" -type f -mtime +$v_crit) ) || ($v_period == "minutes" && -n $(find $v_folder -maxdepth ${v_depth} -name "*${v_file}" -type f -cmin +$v_crit) ) ]]; then
+if [[ ( $v_period == "days" && -n $(find $v_folder -maxdepth ${v_depth} -name "*${v_file}*" -type f -mtime +$v_crit) ) || ($v_period == "minutes" && -n $(find $v_folder -maxdepth ${v_depth} -name "*${v_file}*" -type f -cmin +$v_crit) ) ]]; then
         echo "Files ${v_file} older than $v_crit $v_period in $v_folder!"
         exit 2
 # Warning
-elif [[ ( $v_period == "days" && -n $(find $v_folder -maxdepth ${v_depth} -name "*${v_file}" -type f -mtime +$v_warn) ) || ($v_period == "minutes" && -n $(find $v_folder -maxdepth ${v_depth} -name "*${v_file}" -type f -cmin +$v_warn) ) ]]; then
+elif [[ ( $v_period == "days" && -n $(find $v_folder -maxdepth ${v_depth} -name "*${v_file}*" -type f -mtime +$v_warn) ) || ($v_period == "minutes" && -n $(find $v_folder -maxdepth ${v_depth} -name "*${v_file}*" -type f -cmin +$v_warn) ) ]]; then
         echo "Files ${v_file} older than $v_warn $v_period in $v_folder!"
         exit 1
 # OK
-elif [[ ( $v_period == "days" && -z $(find $v_folder -maxdepth ${v_depth} -name "*${v_file}" -type f -mtime +$v_warn) ) || ($v_period == "minutes" && -z $(find $v_folder -maxdepth ${v_depth} -name "*${v_file}" -type f -cmin +$v_warn) ) ]]; then
+elif [[ ( $v_period == "days" && -z $(find $v_folder -maxdepth ${v_depth} -name "*${v_file}*" -type f -mtime +$v_warn) ) || ($v_period == "minutes" && -z $(find $v_folder -maxdepth ${v_depth} -name "*${v_file}*" -type f -cmin +$v_warn) ) ]]; then
         echo "No files older than $v_warn $v_period in $v_folder."
         exit 0
 fi
