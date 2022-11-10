@@ -3,7 +3,9 @@
 # Check if Files in Folder
 #
 # Author:       Robert Hess
+# Github:       https://github.com/robert2555
 # Date:         14.01.2019
+#
 # 20190128      added function for files
 # 20200820      added directory check
 # 20200826      added depth parameter
